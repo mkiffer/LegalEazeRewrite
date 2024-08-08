@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LegalEazeRewrite.Models.DataModels;
 using Microsoft.AspNetCore.Authorization;
+using LegalEazeRewrite.Data;
 
 namespace LegalEazeRewrite.Controllers
 {
@@ -28,7 +29,7 @@ namespace LegalEazeRewrite.Controllers
         }
 
         // GET: Clients/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null)
             {
@@ -88,7 +89,7 @@ namespace LegalEazeRewrite.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("ClientID,Name,ContactInfo")] Client client)
+        public async Task<IActionResult> Edit(int id, [Bind("ClientID,Name,ContactInfo")] Client client)
         {
             if (id != client.ClientID)
             {
@@ -119,7 +120,7 @@ namespace LegalEazeRewrite.Controllers
         }
 
         // GET: Clients/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null)
             {
@@ -151,7 +152,7 @@ namespace LegalEazeRewrite.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClientExists(string id)
+        private bool ClientExists(int id)
         {
             return _context.Clients.Any(e => e.ClientID == id);
         }

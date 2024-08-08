@@ -6,9 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LegalEazeRewrite.Models.DataModels;
+using Microsoft.AspNetCore.Authorization;
+using LegalEazeRewrite.Data;
+
 
 namespace LegalEazeRewrite.Controllers
 {
+    [Authorize(Roles = "admin")]
+
     public class LawyersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -26,7 +31,7 @@ namespace LegalEazeRewrite.Controllers
         }
 
         // GET: Lawyers/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null)
             {
@@ -94,7 +99,7 @@ namespace LegalEazeRewrite.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("LawyerID,UserID,LawFirmID")] Lawyer lawyer)
+        public async Task<IActionResult> Edit(int id, [Bind("LawyerID,UserID,LawFirmID")] Lawyer lawyer)
         {
             if (id != lawyer.LawyerID)
             {
@@ -127,7 +132,7 @@ namespace LegalEazeRewrite.Controllers
         }
 
         // GET: Lawyers/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null)
             {
@@ -161,7 +166,7 @@ namespace LegalEazeRewrite.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool LawyerExists(string id)
+        private bool LawyerExists(int id)
         {
             return _context.Lawyers.Any(e => e.LawyerID == id);
         }

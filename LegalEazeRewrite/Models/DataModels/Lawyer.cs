@@ -2,10 +2,10 @@
 {
     public class Lawyer
     {
-        public string LawyerID { get; set; }
+        public int LawyerID { get; set; }
         public string UserID { get; set; }
         public User User { get; set; }
-        public string LawFirmID { get; set; }
+        public int LawFirmID { get; set; }
         public LawFirm LawFirm { get; set; }
 
         public ICollection<LawyerClient> LawyerClients { get; set; }

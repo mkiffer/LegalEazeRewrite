@@ -2,7 +2,7 @@
 {
     public class LawFirm
     {
-        public string LawFirmID { get; set; }
+        public int LawFirmID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }

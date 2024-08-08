@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
+namespace LegalEazeRewrite.Data;
 public class ApplicationDbContext : IdentityDbContext<User, IdentityRole, string>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -26,6 +27,24 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole, string
         // LawyerClient configuration
         modelBuilder.Entity<LawyerClient>()
             .HasKey(lc => new { lc.LawyerID, lc.ClientID });
+
+        modelBuilder.Entity<Client>(entity =>
+        {
+            entity.HasKey(e => e.ClientID);
+            entity.Property(e => e.ClientID).ValueGeneratedOnAdd();
+        });
+        modelBuilder.Entity<Court>(entity =>
+        {
+            entity.HasKey(e => e.CourtID);
+            entity.Property(e => e.CourtID).ValueGeneratedOnAdd();
+        });
+        modelBuilder.Entity<LawFirm>(entity =>
+        {
+            entity.HasKey(e => e.LawFirmID);
+            entity.Property(e => e.LawFirmID).ValueGeneratedOnAdd();
+        });
+
+        
 
         modelBuilder.Entity<LawyerClient>()
             .HasOne(lc => lc.Lawyer)

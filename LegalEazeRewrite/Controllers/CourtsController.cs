@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LegalEazeRewrite.Models.DataModels;
 using Microsoft.AspNetCore.Authorization;
+using LegalEazeRewrite.Data;
 
 namespace LegalEazeRewrite.Controllers
 {
@@ -28,7 +29,7 @@ namespace LegalEazeRewrite.Controllers
         }
 
         // GET: Courts/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null)
             {
@@ -88,7 +89,7 @@ namespace LegalEazeRewrite.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("CourtID,Name,Address,City")] Court court)
+        public async Task<IActionResult> Edit(int id, [Bind("CourtID,Name,Address,City")] Court court)
         {
             if (id != court.CourtID)
             {
@@ -119,7 +120,7 @@ namespace LegalEazeRewrite.Controllers
         }
 
         // GET: Courts/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null)
             {
@@ -139,7 +140,7 @@ namespace LegalEazeRewrite.Controllers
         // POST: Courts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var court = await _context.Courts.FindAsync(id);
             if (court != null)
@@ -151,7 +152,7 @@ namespace LegalEazeRewrite.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CourtExists(string id)
+        private bool CourtExists(int id)
         {
             return _context.Courts.Any(e => e.CourtID == id);
         }
