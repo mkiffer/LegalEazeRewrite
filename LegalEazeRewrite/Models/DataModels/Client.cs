@@ -1,4 +1,6 @@
-﻿namespace LegalEazeRewrite.Models.DataModels
+﻿using Microsoft.AspNetCore.Authorization;
+
+namespace LegalEazeRewrite.Models.DataModels
 {
     public class Client
     {
